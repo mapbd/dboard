@@ -94,7 +94,7 @@ function addGeoms(data) {
           name: data[row].name,
           plot: data[row].plot,
           katha: data[row].Katha,
-          status: data[row].status,
+          ab: data[row].ab,
           statuscode: data[row].statuscode,
           zone: data[row].zone,
           road: data[row].road,
@@ -130,7 +130,7 @@ function addGeoms(data) {
         document.getElementById('sidebar-content').innerHTML = "Measurement:    "+ e.target.feature.properties.katha + " Katha";
         document.getElementById('address').innerHTML = "Address: Plot "+ e.target.feature.properties.plot + ", "+ e.target.feature.properties.road + ", "+ e.target.feature.properties.zone + " Zone, Super Star City, Dhaka.";
         document.getElementById('price').innerHTML = "Price:    "+ e.target.feature.properties.price + " BDT.";
-        document.getElementById('sidebar-contentt').innerHTML = e.target.feature.properties.status;
+        document.getElementById('sidebar-contentt').innerHTML = e.target.feature.properties.ab;
         // document.getElementById('sidebar-image').innerHTML ='<img src="https://'+ e.target.feature.properties.image+'" width="300px">';
         document.getElementById('address').innerHTML = "Address: Plot "+ e.target.feature.properties.plot + ", "+ e.target.feature.properties.road + ", "+ e.target.feature.properties.zone + " Zone, Super Star City, Dhaka.";
         document.getElementById('price').innerHTML = "Price:    "+ e.target.feature.properties.price + " BDT.";
