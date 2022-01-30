@@ -48,7 +48,7 @@ function init() {
   let panelContent = {
     id: panelID,
     tab: "<i class='fa fa-bars active'></i>",
-    pane: "<p id='sidebar-content'></p>",
+    pane: '<p id="sidebar-image"><p><h4>details:</h4></p><h4 id="sidebar-contentt" style="color:#800026"></h4><h4 id="sidebar-content"></h4><h5 id="address"></h5> <h5 id="price"></h5>',
     title: "<h2 id='sidebar-title'>Nothing selected</h2>",
   };
   sidebar.addPanel(panelContent);
