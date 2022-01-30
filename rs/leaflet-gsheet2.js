@@ -31,7 +31,7 @@ function init() {
     "Tiles/{z}/{x}/{y}.png",
     {
       attribution:
-        "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> &copy; <a href='http://cartodb.com/attributions'>CartoDB</a>",
+        "",
       subdomains: "abcd",
       maxZoom: 19,
     }
@@ -130,7 +130,7 @@ function addGeoms(data) {
           document.getElementById("sidebar-title").innerHTML =
             e.target.feature.properties.name;
           document.getElementById("sidebar-content").innerHTML =
-            e.target.feature.properties.description;
+            e.target.feature.properties.plot;
           sidebar.open(panelID);
         },
       });
