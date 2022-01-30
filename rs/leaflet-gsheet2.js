@@ -127,10 +127,12 @@ function addGeoms(data) {
           // if this isn't added, then map.click is also fired!
           L.DomEvent.stopPropagation(e);
 
-          document.getElementById("sidebar-title").innerHTML =
-            e.target.feature.properties.name;
-          document.getElementById("sidebar-content").innerHTML =
-            e.target.feature.properties.plot;
+          document.getElementById('sidebar-title').innerHTML = e.target.feature.properties.zone + " Zone, Plot: "+ e.target.feature.properties.plot;
+        document.getElementById('sidebar-content').innerHTML = "Measurement:    "+ e.target.feature.properties.katha + " Katha";
+        document.getElementById('sidebar-contentt').innerHTML = e.target.feature.properties.status;
+        document.getElementById('sidebar-image').innerHTML ='<img src="https://'+ e.target.feature.properties.image+'" width="300px">';
+        document.getElementById('address').innerHTML = "Address: Plot "+ e.target.feature.properties.plot + ", "+ e.target.feature.properties.road + ", "+ e.target.feature.properties.zone + " Zone, Super Star City, Dhaka.";
+        document.getElementById('price').innerHTML = "Price:    "+ e.target.feature.properties.price + " BDT.";
           sidebar.open(panelID);
         },
       });
