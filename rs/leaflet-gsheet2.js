@@ -34,6 +34,7 @@ function init() {
         "",
       subdomains: "abcd",
       maxZoom: 19,
+      minzoom:13
     }
   ).addTo(map);
 
@@ -156,7 +157,7 @@ function addGeoms(data) {
     }).addTo(map);
 
     // Set different polygon fill colors based on number of quarantined
-  addGeoms.eachLayer(function (layer) {
+  geomStyle.eachLayer(function (layer) {
     let d = layer.feature.properties.statuscode;
     let fc = d == 2 ? 'red' :
           d == 1   ? 'blue' :
