@@ -137,14 +137,14 @@ function addGeoms(data) {
       });
     },
 
-    let dist_label_html = "<div class='map-dist-label-cont'>" +
-        "<div class='map-dist-label-name'>" +
-        feature.properties.plot +
-        "</div>" //+
-        // "<div class='map-dist-label-num'>" +feature.properties.plot+
-        // // (map_lang === "bn" ? bn_num(feature.properties.confirmed) : feature.properties.confirmed) +
-        // "</div></div>";
-        ;
+    // let dist_label_html = "<div class='map-dist-label-cont'>" +
+    //     "<div class='map-dist-label-name'>" +
+    //     feature.properties.plot +
+    //     "</div>" //+
+    //     // "<div class='map-dist-label-num'>" +feature.properties.plot+
+    //     // // (map_lang === "bn" ? bn_num(feature.properties.confirmed) : feature.properties.confirmed) +
+    //     // "</div></div>";
+    //     ;
 
       let label = L.marker(layer.getBounds().getCenter(), {
       icon: L.divIcon({
