@@ -72,19 +72,41 @@ function init() {
   // });
 }
 
+
+var polygonLayer;
+
+
 /*
  * Expects a JSON representation of the table with properties columns
  * and a 'geometry' column that can be parsed by parseGeom()
  */
 function addGeoms(data) {
-  data = data.data;
+
+  if (polygonLayer != null) {
+    // If the layer exists, remove it and continue to make a new one with data
+    polygonLayer.remove();
+
+
+  // data = data.data;
+
+
+
+
   // Need to convert the PapaParse JSON into a GeoJSON
   // Start with an empty GeoJSON of type FeatureCollection
   // All the rows will be inserted into a single GeoJSON
-  let fc = {
+
+  var geojsonStates = {
     type: "FeatureCollection",
-    features: [],
+    features: []
   };
+
+
+
+  // let fc = {
+  //   type: "FeatureCollection",
+  //   features: [],
+  // };
 
   for (let row in data) {
     // The Sheets data has a column 'include' that specifies if that row should be mapped
@@ -102,7 +124,7 @@ function addGeoms(data) {
           price: data[row].price,
           image: data[row].image
         };
-        fc.features.push(el);
+        geojsonStates.features.push(el);
       });
     }
   }
@@ -111,7 +133,10 @@ function addGeoms(data) {
   let geomStyle = { color: "#2ca25f", fillColor: "#99d8c9", weight: 2 };
   let geomHoverStyle = { color: "green", fillColor: "#2ca25f", weight: 3 };
 
-  L.geoJSON(fc, {
+
+  polygonLayer = L.geoJSON(geojsonStates, {
+
+  // L.geoJSON(fc, {
     onEachFeature: function (feature, layer) {
       layer.on({
         mouseout: function (e) {
@@ -157,9 +182,9 @@ function addGeoms(data) {
     }).addTo(map);
 
     // Set different polygon fill colors based on number of quarantined
-  geomStyle.eachLayer(function (layer) {
+  polygonLayer.eachLayer(function (layer) {
     let d = layer.feature.properties.statuscode;
-    let fc = d == 2 ? 'red' :
+    let geojsonStates = d == 2 ? 'red' :
           d == 1   ? 'blue' :
           d == 0    ? 'green' :
           '#FFFFFF';
