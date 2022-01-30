@@ -92,7 +92,14 @@ function addGeoms(data) {
       features.forEach((el) => {
         el.properties = {
           name: data[row].name,
-          description: data[row].description,
+          plot: data[row].plot,
+          katha: data[row].Katha,
+          status: data[row].status,
+          statuscode: data[row].statuscode,
+          zone: data[row].zone,
+          road: data[row].road,
+          price: data[row].price,
+          image: data[row].image
         };
         fc.features.push(el);
       });
@@ -239,7 +246,7 @@ function parseGeom(gj) {
   }
 
   // Set different polygon fill colors based on number of quarantined
-  polygonLayer.eachLayer(function (layer) {
+  addGeoms.eachLayer(function (layer) {
     let d = layer.feature.properties.statuscode;
     let fc = d == 2 ? 'red' :
           d == 1   ? 'blue' :
