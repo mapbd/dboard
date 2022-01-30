@@ -34,7 +34,7 @@ function init() {
         "",
       subdomains: "abcd",
       maxZoom: 19,
-      minzoom:13
+      minzoom:13,
     }
   ).addTo(map);
 
@@ -72,41 +72,19 @@ function init() {
   // });
 }
 
-
-var polygonLayer;
-
-
 /*
  * Expects a JSON representation of the table with properties columns
  * and a 'geometry' column that can be parsed by parseGeom()
  */
 function addGeoms(data) {
-
-  if (polygonLayer != null) {
-    // If the layer exists, remove it and continue to make a new one with data
-    polygonLayer.remove();
-
-
-  // data = data.data;
-
-
-
-
+  data = data.data;
   // Need to convert the PapaParse JSON into a GeoJSON
   // Start with an empty GeoJSON of type FeatureCollection
   // All the rows will be inserted into a single GeoJSON
-
-  var geojsonStates = {
+  let fc = {
     type: "FeatureCollection",
-    features: []
+    features: [],
   };
-
-
-
-  // let fc = {
-  //   type: "FeatureCollection",
-  //   features: [],
-  // };
 
   for (let row in data) {
     // The Sheets data has a column 'include' that specifies if that row should be mapped
@@ -124,19 +102,20 @@ function addGeoms(data) {
           price: data[row].price,
           image: data[row].image
         };
-        geojsonStates.features.push(el);
+        fc.features.push(el);
       });
     }
   }
 
+
+
+
+
   // The geometries are styled slightly differently on mouse hovers
-  let geomStyle = { color: "#2ca25f", fillColor: "#99d8c9", weight: 2 };
-  let geomHoverStyle = { color: "green", fillColor: "#2ca25f", weight: 3 };
+  var geomStyle = { color: "#2ca25f", fillColor: "#99d8c9", weight: 2 };
+  var geomHoverStyle = { color: "green", fillColor: "#2ca25f", weight: 3 };
 
-
-  polygonLayer = L.geoJSON(geojsonStates, {
-
-  // L.geoJSON(fc, {
+  L.geoJSON(fc, {
     onEachFeature: function (feature, layer) {
       layer.on({
         mouseout: function (e) {
@@ -182,9 +161,9 @@ function addGeoms(data) {
     }).addTo(map);
 
     // Set different polygon fill colors based on number of quarantined
-  polygonLayer.eachLayer(function (layer) {
+  geomStyle.eachLayer(function (layer) {
     let d = layer.feature.properties.statuscode;
-    let geojsonStates = d == 2 ? 'red' :
+    let fc = d == 2 ? 'red' :
           d == 1   ? 'blue' :
           d == 0    ? 'green' :
           '#FFFFFF';
