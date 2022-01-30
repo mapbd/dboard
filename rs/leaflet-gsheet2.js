@@ -136,8 +136,40 @@ function addGeoms(data) {
         },
       });
     },
-    style: geomStyle,
-  }).addTo(map);
+
+    let dist_label_html = "<div class='map-dist-label-cont'>" +
+        "<div class='map-dist-label-name'>" +
+        feature.properties.plot +
+        "</div>" //+
+        // "<div class='map-dist-label-num'>" +feature.properties.plot+
+        // // (map_lang === "bn" ? bn_num(feature.properties.confirmed) : feature.properties.confirmed) +
+        // "</div></div>";
+        ;
+
+      let label = L.marker(layer.getBounds().getCenter(), {
+      icon: L.divIcon({
+        className: 'label',
+        html: dist_label_html,
+      })
+    }).addTo(map);
+    },
+    style: geomStyle
+    }).addTo(map);
+
+    // Set different polygon fill colors based on number of quarantined
+  addGeoms.eachLayer(function (layer) {
+    let d = layer.feature.properties.statuscode;
+    let fc = d == 2 ? 'red' :
+          d == 1   ? 'blue' :
+          d == 0    ? 'green' :
+          '#FFFFFF';
+    layer.setStyle({fillColor: fc});
+    layer.feature.fill_color = fc;  // Save color to use again after mouseout
+  });
+
+
+  //   style: geomStyle,
+  // }).addTo(map);
 }
 
 // /*
@@ -246,14 +278,5 @@ function parseGeom(gj) {
     return [{ type: "Feature", geometry: { type: type, coordinates: gj } }];
   }
 
-  // Set different polygon fill colors based on number of quarantined
-  addGeoms.eachLayer(function (layer) {
-    let d = layer.feature.properties.statuscode;
-    let fc = d == 2 ? 'red' :
-          d == 1   ? 'blue' :
-          d == 0    ? 'green' :
-          '#FFFFFF';
-    layer.setStyle({fillColor: fc});
-    layer.feature.fill_color = fc;  // Save color to use again after mouseout
-  });
+
 }
